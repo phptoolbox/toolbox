@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
 
-require_once __DIR__.'/../autoload.php.dist';
+require_once __DIR__.'/autoload.php';
 define('PHPUnit_MAIN_METHOD', 'PHPUnit_TextUI_Command::main');
 PHPUnit_TextUI_Command::main();

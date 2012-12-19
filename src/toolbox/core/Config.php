@@ -11,10 +11,12 @@
 
 namespace toolbox\core;
 
+use Symfony\Component\Finder\Finder;
+
 class Config
 {
     static private $config = array();
-
+    static private $isLoaded = false;
     static public function get($name,$default = null)
     {
         $keys = explode('.', $name);
@@ -34,12 +36,28 @@ class Config
 
     static public function load()
     {
-        $cwd = getcwd().DIRECTORY_SEPARATOR.'config';
-
-        if(is_file($file=$cwd.'/tools.ini')){
-            $data = parse_ini_file($file,true);
-            self::$config = $data;
+        if(true===self::$isLoaded){
+            return;
         }
+        $dir = getcwd().DIRECTORY_SEPARATOR.'toolbox';
+        if(!is_dir($dir)){
+            throw new \InvalidArgumentException('toolbox.inexistent_config_dir',$dir);
+        }
+
+        $iterator = Finder::create();
+        $iterator
+            ->in($dir)
+            ->files()
+        ;
+        $data = array();
+        foreach($iterator as $file){
+            $parsed = parse_ini_file($file, true);
+            $data = array_merge($data,$parsed);
+        }
+
+        self::$config = array_merge(self::$config,$data);
+        self::$isLoaded = true;
+
     }
 }
 ?>

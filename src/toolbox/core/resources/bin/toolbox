@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-require_once __DIR__.'/../autoload.php.dist';
+require_once __DIR__.'/autoload.php';
 
 use toolbox\core\Application;
 use toolbox\tools\Shell;

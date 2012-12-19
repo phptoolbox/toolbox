@@ -9,21 +9,22 @@
  * file that was distributed with this source code.
  */
 
-
 namespace toolbox\core\tests;
 
 use toolbox\core\Config;
 use dayax\core\test\TestCase;
-
+use Symfony\Component\Finder\Finder;
 class ConfigTest extends TestCase
 {
+
     private $cwd;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->cwd = getcwd();
-        chdir(__DIR__.'/resources');
+        chdir(__DIR__ . '/resources');
         Config::load();
+        print_r(Config::load());
         parent::setUp();
     }
 
@@ -35,29 +36,29 @@ class ConfigTest extends TestCase
 
     public function testLoad()
     {
-        $this->assertTrue(is_array(Config::getAll()));
+        $this->assertTrue(count(Config::getAll())>0,'should have configuration');
     }
 
     public function testShouldReturnDefaultValue()
     {
-        $this->assertTrue(is_null(Config::get('bar',null)));
+        $this->assertTrue(is_null(Config::get('bar', null)));
     }
 
     /**
      * @dataProvider getTestData
      */
-    public function testGetMethodShouldReturnConfigValue($name,$expected)
+    public function testGetMethodShouldReturnConfigValue($name, $expected)
     {
-
-        $this->assertEquals($expected,Config::get($name));
+        $this->assertEquals($expected, Config::get($name));
     }
 
     public function getTestData()
     {
         return array(
-            array('phpunit.coverage.html','log/report'),
-            array('phpunit.coverage.clover','log/coverage.xml'),
+            array('phpunit.coverage.html', 'log/report'),
+            array('phpunit.coverage.clover', 'log/coverage.xml'),
         );
     }
 }
+
 ?>
