@@ -26,5 +26,5 @@
     "bin": [
         "resources/bin/phpunit",
         "resources/bin/toolbox"
-    ],
+    ]
 }
