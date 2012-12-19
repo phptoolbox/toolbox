@@ -1,12 +1,15 @@
 #!/usr/bin/env php
 <?php
-
-require_once __DIR__.'/autoload.php';
-
 use toolbox\core\Application;
 use toolbox\core\Shell;
-
-$app = new Application();
-$shell = new Shell($app);
-$shell->run();
+use Symfony\Component\Console\Output\ConsoleOutput;
+try{
+    require_once __DIR__.'/toolbox.php';
+    $app = new Application();
+    $shell = new Shell($app);
+    $shell->run();
+}catch(\Exception $e){
+    exit(1);
+}
+exit(0);
 ?>

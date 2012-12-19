@@ -4,6 +4,7 @@ namespace toolbox\core;
 
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Console\Output\ConsoleOutput;
 use toolbox\core\Config;
 
 /**
@@ -15,9 +16,19 @@ class Application extends BaseApplication
 {
     public function __construct()
     {
-        Config::load();
         parent::__construct('toolbox', '1.0.0');
+        $this->loadConfig();
         $this->scanCommand();
+    }
+
+    private function loadConfig()
+    {
+        try{
+            Config::load();
+        }catch(\Exception $e){
+            $this->renderException($e, new ConsoleOutput());
+            throw $e;
+        }
     }
 
     private function scanCommand()

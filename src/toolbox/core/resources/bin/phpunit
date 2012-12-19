@@ -1,6 +1,12 @@
 #!/usr/bin/env php
 <?php
+$loader = require_once '/apps/tools/vendor/autoload.php';
+$loader->register();
 
-require_once __DIR__.'/autoload.php';
+$loader->addClassMap(array(
+    'toolbox\core\Config' => "/project/toolbox/dev/src/toolbox/core/Config.php",
+    'toolbox\core\Application' => "/project/toolbox/dev/src/toolbox/core/Application.php",
+));
 define('PHPUnit_MAIN_METHOD', 'PHPUnit_TextUI_Command::main');
 PHPUnit_TextUI_Command::main();
+?>

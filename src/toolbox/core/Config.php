@@ -15,20 +15,21 @@ use Symfony\Component\Finder\Finder;
 
 class Config
 {
+
     static private $config = array();
     static private $isLoaded = false;
     static private $isDefaultLoaded = false;
 
-    static public function get($name,$default = null)
+    static public function get($name, $default = null)
     {
         $keys = explode('.', $name);
         $config = self::$config;
-        if(count($keys) > 1){
+        if (count($keys) > 1) {
             $section = array_shift($keys);
-            $config = isset(self::$config[$section]) ? self::$config[$section]:array();
+            $config = isset(self::$config[$section]) ? self::$config[$section] : array();
         }
-        $key = implode('.',$keys);
-        return isset($config[$key]) ? $config[$key]:$default;
+        $key = implode('.', $keys);
+        return isset($config[$key]) ? $config[$key] : $default;
     }
 
     static public function getAll()
@@ -38,40 +39,42 @@ class Config
 
     static private function loadDefaults()
     {
-        if(true===self::$isDefaultLoaded){
+        if (true === self::$isDefaultLoaded) {
             return;
         }
 
-        $file = __DIR__.'/resources/defaults.ini';
-        self::$config = parse_ini_file($file,true);
+        $file = __DIR__ . '/resources/defaults.ini';
+        self::$config = parse_ini_file($file, true);
         self::$isDefaultLoaded = true;
     }
 
     static public function load()
     {
-        if(true===self::$isLoaded){
+        if (true === self::$isLoaded) {
             return;
         }
         self::loadDefaults();
-        $dir = getcwd().DIRECTORY_SEPARATOR.'toolbox';
-        if(!is_dir($dir)){
-            throw new ConfigLoadException('toolbox.inexistent_config_dir',$dir);
+        $dir = getcwd() . DIRECTORY_SEPARATOR . 'toolbox';
+        if (!is_dir($dir)) {
+            throw new ConfigLoadException('toolbox.inexistent_config_dir', $dir);
         }
 
         $iterator = Finder::create();
         $iterator
-            ->name('*.ini')
-            ->in($dir)
-            ->files()
+                ->name('*.ini')
+                ->in($dir)
+                ->files()
         ;
         $data = array();
-        foreach($iterator as $file){
+        foreach ($iterator as $file) {
             $parsed = parse_ini_file($file, true);
-            $data = array_merge($data,$parsed);
+            $data = array_merge($data, $parsed);
         }
 
-        self::$config = array_merge(self::$config,$data);
+        self::$config = array_merge(self::$config, $data);
         self::$isLoaded = true;
     }
+
 }
+
 ?>

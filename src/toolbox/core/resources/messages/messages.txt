@@ -1,0 +1,1 @@
+toolbox.inexistent_config_dir = Can't find a valid directory for toolbox configuration. Please be sure that you already init a new PHP Toolbox project.
