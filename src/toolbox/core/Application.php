@@ -2,11 +2,16 @@
 
 namespace toolbox\core;
 
-use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Application as BaseApplication;
+use Symfony\Component\Console\Input\InputOption;
+
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+use toolbox\core\Shell;
 use toolbox\core\Config;
-use dayax\core\Dayax;
+
 /**
  * Description of Applcation
  *
@@ -17,6 +22,9 @@ class Application extends BaseApplication
     public function __construct()
     {
         parent::__construct('toolbox', '1.0.0');
+        $this->getDefinition()->addOption(new InputOption('--shell', '-s', InputOption::VALUE_NONE, 'Launch the shell.'));
+        $this->getDefinition()->addOption(new InputOption('--process-isolation', null, InputOption::VALUE_NONE, 'Launch commands from shell as a separate processes.'));
+        $this->getDefinition()->addOption(new InputOption('--no-debug', null, InputOption::VALUE_NONE, 'Switches off debug mode.'));
         $this->loadConfig();
         $this->scanCommand();
     }
@@ -64,6 +72,29 @@ class Application extends BaseApplication
         if(class_exists($class,true)){
             $this->add(new $class());
         }
+    }
+
+    /**
+     * Runs the current application.
+     *
+     * @param InputInterface  $input  An Input instance
+     * @param OutputInterface $output An Output instance
+     *
+     * @return integer 0 if everything went fine, or an error code
+     */
+    public function doRun(InputInterface $input, OutputInterface $output)
+    {
+        //$this->registerCommands();
+
+        if (true === $input->hasParameterOption(array('--shell', '-s'))) {
+            $shell = new Shell($this);
+            $shell->setProcessIsolation($input->hasParameterOption(array('--process-isolation')));
+            $shell->run();
+
+            return 0;
+        }
+
+        return parent::doRun($input, $output);
     }
 }
 
