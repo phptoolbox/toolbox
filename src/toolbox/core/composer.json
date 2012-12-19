@@ -14,6 +14,7 @@
         "symfony/finder": ">=2.0.0",
         "symfony/filesystem": ">=2.0.0",
         "symfony/console": ">=2.0.0",
+        "symfony/process": ">=2.0.0",
         "phpunit/phpunit": "3.7.x",
         "phpunit/php-invoker": "1.1.x"
     },
