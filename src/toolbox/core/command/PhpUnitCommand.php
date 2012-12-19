@@ -22,11 +22,6 @@ class PhpUnitCommand extends Command
         ;
     }
 
-    private function getConfigFile()
-    {
-
-    }
-
     private function getTestDirectory()
     {
         $cwd = getcwd();

@@ -12,6 +12,7 @@
 namespace toolbox\core;
 
 use Symfony\Component\Finder\Finder;
+use dayax\core\Dayax;
 
 class Config
 {
@@ -43,8 +44,12 @@ class Config
             return;
         }
 
-        $file = __DIR__ . '/resources/defaults.ini';
-        self::$config = parse_ini_file($file, true);
+        $resources = __DIR__ . '/resources/defaults.ini';
+        self::$config = parse_ini_file($resources, true);
+
+        if(is_file($file=Dayax::getRootDir().'/config/defaults.ini')){
+            self::$config = array_merge(parse_ini_file($file,true));
+        }
         self::$isDefaultLoaded = true;
     }
 

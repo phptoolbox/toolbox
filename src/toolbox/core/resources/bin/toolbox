@@ -6,9 +6,9 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 try{
     require_once __DIR__.'/toolbox.php';
     $app = new Application();
-    $shell = new Shell($app);
-    $shell->run();
+    $app->run();
 }catch(\Exception $e){
+    echo $e->getMessage();
     exit(1);
 }
 exit(0);

@@ -6,7 +6,7 @@ use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use toolbox\core\Config;
-
+use dayax\core\Dayax;
 /**
  * Description of Applcation
  *
@@ -26,8 +26,6 @@ class Application extends BaseApplication
         try{
             Config::load();
         }catch(\Exception $e){
-            $this->renderException($e, new ConsoleOutput());
-            throw $e;
         }
     }
 
