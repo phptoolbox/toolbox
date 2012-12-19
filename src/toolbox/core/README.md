@@ -1,10 +1,4 @@
-tools
-=====
+PHP ToolBox core package
+========================
 
-All Tools Required For PHP Development
---------------------------------------
-
-Included in this tools:
-
-phpunit
-apigen
+[![Build Status](https://travis-ci.org/dayax/dayax.png?branch=master)](https://travis-ci.org/phptoolbox/core)
