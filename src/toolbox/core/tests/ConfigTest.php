@@ -13,7 +13,7 @@ namespace toolbox\core\tests;
 
 use toolbox\core\Config;
 use dayax\core\test\TestCase;
-use Symfony\Component\Finder\Finder;
+
 class ConfigTest extends TestCase
 {
 
@@ -24,7 +24,6 @@ class ConfigTest extends TestCase
         $this->cwd = getcwd();
         chdir(__DIR__ . '/resources');
         Config::load();
-        print_r(Config::load());
         parent::setUp();
     }
 

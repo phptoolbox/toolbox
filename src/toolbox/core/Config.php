@@ -17,6 +17,8 @@ class Config
 {
     static private $config = array();
     static private $isLoaded = false;
+    static private $isDefaultLoaded = false;
+
     static public function get($name,$default = null)
     {
         $keys = explode('.', $name);
@@ -34,14 +36,26 @@ class Config
         return self::$config;
     }
 
+    static private function loadDefaults()
+    {
+        if(true===self::$isDefaultLoaded){
+            return;
+        }
+
+        $file = __DIR__.'/resources/defaults.ini';
+        self::$config = parse_ini_file($file,true);
+        self::$isDefaultLoaded = true;
+    }
+
     static public function load()
     {
         if(true===self::$isLoaded){
             return;
         }
+        self::loadDefaults();
         $dir = getcwd().DIRECTORY_SEPARATOR.'toolbox';
         if(!is_dir($dir)){
-            throw new \InvalidArgumentException('toolbox.inexistent_config_dir',$dir);
+            throw new ConfigLoadException('toolbox.inexistent_config_dir',$dir);
         }
 
         $iterator = Finder::create();
@@ -58,7 +72,6 @@ class Config
 
         self::$config = array_merge(self::$config,$data);
         self::$isLoaded = true;
-
     }
 }
 ?>
