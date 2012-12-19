@@ -1,0 +1,20 @@
+{
+    "name": "toolbox/git",
+    "description": "PHP Toolbox Git Command",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anthonius Munthi",
+            "email": "me@itstoni.com"
+        }
+    ],
+    "require": {
+        "php":">=5.3.3",
+    },
+    "target-dir": "toolbox/git",
+    "autoload":{
+        "psr-0":{
+            "toolbox\\git": ""
+        }
+    }
+}
