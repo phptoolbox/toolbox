@@ -1,0 +1,14 @@
+{
+    "name": "toolbox/toolbox",
+    "description": "All in one PHP developer tools",
+    "authors": [
+        {
+            "name": "Anthonius Munthi",
+            "email": "me@itstoni.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+
+    }
+}
