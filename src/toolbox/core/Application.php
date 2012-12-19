@@ -4,6 +4,7 @@ namespace toolbox\core;
 
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Finder\Finder;
+use toolbox\core\Config;
 
 /**
  * Description of Applcation
@@ -14,26 +15,43 @@ class Application extends BaseApplication
 {
     public function __construct()
     {
+        Config::load();
         parent::__construct('toolbox', '1.0.0');
         $this->scanCommand();
     }
 
     private function scanCommand()
     {
-        $i = Finder::create()
-                ->files()
-                ->name('*Command.php')
-                ->in(__DIR__.'/command')
-        ;
-        foreach($i as $file){
-            $this->addFile($file);
+        $dirs = array(
+            __NAMESPACE__.'\\command' =>__DIR__.'/command',
+        );
+
+        if(!is_null($config=Config::get('command',null))){
+            if(isset($config['directory']) || isset($config['namespace'])){
+                $ns = isset($config['namespace']) ? $config['namespace'] : "\\";
+                $udir = isset($config['directory']) ? $config['directory'] : 'toolbox/command';
+                $dirs[$ns] = $udir;
+            }
         }
+
+        foreach($dirs as $namespace=>$dir){
+            $i = Finder::create()
+                    ->files()
+                    ->name('*Command.php')
+                    ->in($dir)
+            ;
+
+            foreach($i as $file){
+                $this->addFile($file,$namespace);
+            }//end foreach file
+        }//end dir for each
+
     }
 
-    private function addFile(\SplFileInfo $file)
+    private function addFile(\SplFileInfo $file,$namespace)
     {
-        $class = __NAMESPACE__.'\\command'.'\\'.$file->getBasename('.php');
-
+        $class = $namespace.'\\'.$file->getBasename('.php');
+        require_once($file);
         if(class_exists($class,true)){
             $this->add(new $class());
         }

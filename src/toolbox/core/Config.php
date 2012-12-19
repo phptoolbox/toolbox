@@ -46,6 +46,7 @@ class Config
 
         $iterator = Finder::create();
         $iterator
+            ->name('*.ini')
             ->in($dir)
             ->files()
         ;
