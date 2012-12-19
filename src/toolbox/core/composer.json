@@ -1,0 +1,30 @@
+{
+    "name": "toolbox/core",
+    "description": "Toolbox Core Package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anthonius Munthi",
+            "email": "me@itstoni.com"
+        }
+    ],
+    "require": {
+        "php":">=5.3.3",
+        "dayax/core": "@dev",
+        "symfony/finder": ">=2.0.0",
+        "symfony/filesystem": ">=2.0.0",
+        "symfony/console": ">=2.0.0",
+        "phpunit/phpunit": "3.7.x",
+        "phpunit/php-invoker": "1.1.x"
+    },
+    "target-dir": "toolbox/core",
+    "autoload":{
+        "psr-0":{
+            "toolbox\\core": ""
+        }
+    },
+    "bin": [
+        "resources/bin/phpunit",
+        "resources/bin/toolbox"
+    ],
+}

@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__.'/../autoload.php.dist';
+
+use toolbox\core\Application;
+use toolbox\tools\Shell;
+
+$app = new Application();
+$shell = new Shell($app);
+$shell->run();
+?>
