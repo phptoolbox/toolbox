@@ -11,14 +11,20 @@
     "require-dev": {
         "php": ">=5.3.3",
         "dayax/core": "@dev",
-        "symfony/finder": ">=2.0.0",
-        "symfony/filesystem": ">=2.0.0",
-        "symfony/console": ">=2.0.0",
-	"symfony/process": ">=2.0.0"
+        "symfony/finder": "2.1.*",
+        "symfony/filesystem": "2.1.*",
+        "symfony/console": "2.1.*",
+	"symfony/process": "2.1.*",
+        "fabpot/goutte": "@dev"
     },
     "autoload": {
         "psr-0": {
             "toolbox": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
         }
     }
 }
