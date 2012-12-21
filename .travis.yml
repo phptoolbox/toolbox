@@ -3,9 +3,11 @@ language: php
 php:
   - 5.3
   - 5.4
-before_install:  
+
+before_install:
   - composer install --dev
-  - phpunit -c phpunit.xml.dist
-  
+
+before_script: ./before_script.sh
+
 script:
-  - phpunit --configuration phpunit.xml.dist --coverage-text
+  - phpunit -c phpunit.xml.dist --coverage-text

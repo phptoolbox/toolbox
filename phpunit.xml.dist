@@ -11,6 +11,10 @@
          syntaxCheck="false"
          bootstrap="autoload.php.dist"
 >
+    <php>
+        <const name="TOOLBOX_PHPUNIT_BASE_TEST_URL" value="http://127.0.0.1:8080"/>
+    </php>
+
     <testsuites>
         <testsuite name="PHP Toolbox Test Suite">
             <directory suffix="Test.php">./src/toolbox/*/tests</directory>
