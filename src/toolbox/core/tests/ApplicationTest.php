@@ -11,15 +11,15 @@
 
 namespace toolbox\core\tests;
 
-use toolbox\core\Application;
-use dayax\core\test\TestCase;
+use toolbox\core\test\TestApplication;
+use toolbox\core\test\ToolboxTestCase;
 
 /**
  * Description of ApplicationTest
  *
  * @author Anthonius Munthi <toni.munthi@gmail.com>
  */
-class ApplicationTest extends TestCase
+class ApplicationTest extends ToolboxTestCase
 {
     private $cwd;
 
@@ -38,10 +38,16 @@ class ApplicationTest extends TestCase
         $cwd = getcwd();
         chdir(__DIR__.'/resources');
 
-        $app = new Application();
+        $app = new TestApplication();
 
         $this->assertTrue($app->has('foo'));
         chdir($cwd);
+    }
+    
+    public function testShouldExecuteCommand()
+    {       	    	
+    	$output = $this->runCommand('--list');
+    	$this->assertContains('toolbox version', $output);
     }
 }
 

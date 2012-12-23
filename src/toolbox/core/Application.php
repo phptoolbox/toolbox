@@ -52,6 +52,9 @@ class Application extends BaseApplication
         }
 
         foreach($dirs as $namespace=>$dir){
+        	if(!is_dir($dir)){
+        		continue;
+        	}
             $i = Finder::create()
                     ->files()
                     ->name('*Command.php')

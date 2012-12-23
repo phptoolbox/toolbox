@@ -10,6 +10,7 @@
     ],
     "require": {
         "php":">=5.3.3",
+        "toolbox\\core": "1.*"
     },
     "target-dir": "toolbox/git",
     "autoload":{

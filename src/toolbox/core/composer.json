@@ -29,5 +29,8 @@
         "resources/bin/phpunit",
         "resources/bin/toolbox",
         "resources/bin/composer.phar"
-    ]
+    ],
+    "extra": {
+        "branch-alias": "dev-master as 1.0.0-dev"
+    }
 }

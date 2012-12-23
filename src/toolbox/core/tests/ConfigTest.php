@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the dayax package.
+ * This file is part of the toolbox package.
  *
  * (c) Toni Munthi <me@itstoni.com>
  *
