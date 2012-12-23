@@ -46,7 +46,7 @@ class SubtreePushCommandTest extends ToolboxTestCase
 	public function testShouldRunWhenGitConfigured()
 	{		
 		chdir(__DIR__.'/resources/fix2');	
-		Config::load();
+		Config::load(true);
 		$t = new CommandTester(new SubtreePushCommand());
 		$t->execute(array(),array());
 	}
