@@ -11,7 +11,6 @@
 
 namespace toolbox\git\command;
 
-use Symfony\Component\Console\Command\Command;
 use toolbox\core\Config;
 
 /**
@@ -19,7 +18,7 @@ use toolbox\core\Config;
  *
  * @author Anthonius Munthi <toni.munthi@gmail.com>
  */
-class SubtreePushCommand extends Command
+class SubtreePushCommand extends BaseCommand
 {
     protected function configure()
     {
@@ -51,7 +50,7 @@ class SubtreePushCommand extends Command
             $output->writeln("\n\n");
             $output->writeln(sprintf('<info>Push from <comment>%s</comment> to <comment>%s</comment> branch <comment>%s</comment></info>',$prefix,$repo,$branch));
             $output->writeln('<comment>'.$cmd.'</comment>');
-            passthru($cmd);
+            $this->runGit($cmd);
         }
         $output->writeln("\n\n");
 

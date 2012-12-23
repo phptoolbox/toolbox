@@ -22,14 +22,9 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 abstract class BaseCommand extends Command
 {
-    protected function runGit()
+    protected function runGit($command)
     {
-
-    }
-    
-    protected function initialize(InputInterface $input, OutputInterface $output)
-    {
-
+    	
     }
 }
 

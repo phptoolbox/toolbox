@@ -13,7 +13,7 @@ use toolbox\core\Shell;
 use toolbox\core\Config;
 
 /**
- * Description of Applcation
+ * Description of Application
  *
  * @author toni
  */
