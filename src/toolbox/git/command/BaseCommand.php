@@ -24,7 +24,12 @@ abstract class BaseCommand extends Command
 {
     protected function runGit($command)
     {    	
-    	passthru($command);    	
+    	passthru($command,$return);
+    	
+        if(0!==$return){
+        	throw new Exception('git.command_failed');
+        }
+        return $return;
     }
 }
 
