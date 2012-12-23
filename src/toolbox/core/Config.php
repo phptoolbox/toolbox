@@ -55,7 +55,7 @@ class Config
 
     static public function load($force=false)
     {
-        if (true === self::$isLoaded && false===force) {
+        if (true === self::$isLoaded && false===$force) {
             return;
         }
         self::loadDefaults();
