@@ -53,9 +53,9 @@ class Config
         self::$isDefaultLoaded = true;
     }
 
-    static public function load()
+    static public function load($force=false)
     {
-        if (true === self::$isLoaded) {
+        if (true === self::$isLoaded && false===force) {
             return;
         }
         self::loadDefaults();
