@@ -28,6 +28,6 @@
     "bin": [
         "resources/bin/phpunit",
         "resources/bin/toolbox",
-        "resources/bin/composer.phar",
+        "resources/bin/composer.phar"
     ]
 }
