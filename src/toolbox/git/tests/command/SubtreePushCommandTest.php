@@ -49,6 +49,11 @@ class SubtreePushCommandTest extends ToolboxTestCase
 		Config::load(true);
 		$t = new CommandTester(new SubtreePushCommand());
 		$t->execute(array(),array());
+		$this->assertContains('Push from', $t->getDisplay());
+		$this->assertContains('branch master', $t->getDisplay());
+		
+		$t->execute(array('branch'=>'phpunit'),array());
+		$this->assertContains('branch phpunit', $t->getDisplay());
 	}
 		
 	

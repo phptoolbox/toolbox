@@ -40,7 +40,6 @@ class SubtreePushCommand extends BaseCommand
         $dirs = Config::get('git_split_dir',null);
         
         if(is_null($dirs)){
-        	print_r(Config::getAll());
         	throw new InvalidArgumentException('toolbox.git_split_dir_invalid_config');
         }                        
         
