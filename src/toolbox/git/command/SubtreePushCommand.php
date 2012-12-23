@@ -30,18 +30,25 @@ class SubtreePushCommand extends BaseCommand
     {
         $cwd = getcwd();
 
-        $chdir = !is_null(Config::get('git.directory',null)) ? Config::get('git.directory'):__DIR__.'/dev';
+        $chdir = !is_null(Config::get('git.directory',null)) ? Config::get('git.directory'):$cwd.'/dev';
+        
         if(!is_dir($chdir)){        	
-            throw new InvalidArgumentException('toolbox.git_subtree_push_invalid_config');            
-        }
-
+            throw new InvalidArgumentException('toolbox.git_subtree_push_invalid_dir');            
+        }               
         $output->writeln("\n\n<info>Working in directory: <comment>".$chdir."</comment></info>");
         chdir($chdir);
-        $dirs = Config::get('git_split_dir');
-        $branch = $input->getArgument('branch');
-
+        $dirs = Config::get('git_split_dir',null);
+        
+        if(is_null($dirs)){
+        	print_r(Config::getAll());
+        	throw new InvalidArgumentException('toolbox.git_split_dir_invalid_config');
+        }                        
+        
+                
+        $branch = $input->getArgument('branch');        
         $tpl = "git subtree push --prefix=%prefix% %repo% %branch%";
         foreach($dirs as $prefix=>$repo){
+        	
             $cmd = strtr($tpl,array(
                 '%prefix%'=>$prefix,
                 '%repo%'=>$repo,
