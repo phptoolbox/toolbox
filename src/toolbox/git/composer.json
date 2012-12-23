@@ -8,9 +8,10 @@
             "email": "me@itstoni.com"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "php":">=5.3.3",
-        "toolbox/core": "1.*"
+        "toolbox/core": "@dev"
     },
     "target-dir": "toolbox/git",
     "autoload":{
