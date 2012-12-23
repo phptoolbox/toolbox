@@ -18,9 +18,12 @@ use toolbox\phpunit\WebTestCase;
  *
  * @author Anthonius Munthi <me@itstoni.com>
  */
-class BaseTestCase extends WebTestCase
-{
-    
+abstract class BaseTestCase extends WebTestCase
+{    
+    public function setUp()
+    {
+        $this->setBaseUrl(TOOLBOX_PHPUNIT_BASE_TEST_URL);
+    }
 }
 
 ?>

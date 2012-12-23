@@ -1,8 +1,13 @@
 language: php
+
 php:
-  - "5.4"
-  - "5.3"
+  - 5.3
+  - 5.4
+
 before_script:
   - composer install -n --dev
+  - ./before_script.sh
+
 script:
-  - phpunit
+  - phpunit -c phpunit.xml.dist --testdox
+  - phpunit -c phpunit.xml.dist --coverage-text
