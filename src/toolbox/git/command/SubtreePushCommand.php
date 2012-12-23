@@ -44,8 +44,9 @@ class SubtreePushCommand extends BaseCommand
         }                        
         
                 
-        $branch = $input->getArgument('branch');        
-        $tpl = "git subtree push --prefix=%prefix% %repo% %branch%";
+        $branch = $input->getArgument('branch');
+        $subtree = realpath(__DIR__.'/../resources/bin/git-subtree.sh');     
+        $tpl = $subtree." push --prefix=%prefix% %repo% %branch%";
         foreach($dirs as $prefix=>$repo){
         	
             $cmd = strtr($tpl,array(
