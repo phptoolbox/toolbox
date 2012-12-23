@@ -24,7 +24,7 @@ abstract class BaseCommand extends Command
 {
     protected function runGit($command)
     {
-    	
+    	passthru($command);
     }
 }
 

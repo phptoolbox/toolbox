@@ -53,7 +53,7 @@ class SubtreePushCommandTest extends ToolboxTestCase
 		$this->assertContains('branch master', $t->getDisplay());
 		
 		$t->execute(array('branch'=>'phpunit'),array());
-		$this->assertContains('branch phpunit', $t->getDisplay());
+		$this->assertContains('branch phpunit', $t->getDisplay());		
 	}
 		
 	
