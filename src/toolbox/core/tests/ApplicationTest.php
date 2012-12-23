@@ -11,7 +11,7 @@
 
 namespace toolbox\core\tests;
 
-use toolbox\core\test\TestApplication;
+use toolbox\core\Application;
 use toolbox\core\test\ToolboxTestCase;
 
 /**
@@ -38,16 +38,10 @@ class ApplicationTest extends ToolboxTestCase
         $cwd = getcwd();
         chdir(__DIR__.'/resources');
 
-        $app = new TestApplication();
+        $app = new Application();
 
         $this->assertTrue($app->has('foo'));
         chdir($cwd);
-    }
-    
-    public function testShouldExecuteCommand()
-    {       	    	
-    	$output = $this->runCommand('--list');
-    	$this->assertContains('toolbox version', $output);
     }
 }
 

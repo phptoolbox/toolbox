@@ -23,7 +23,7 @@ class SubtreePushCommand extends BaseCommand
     protected function configure()
     {
         $this->setName('git:subtree:push');
-        $this->addArgument('branch',null,'Define a branch to split','master');
+        $this->addArgument('branch',null,'Define a branch to split','master');             
     }
 
     protected function execute(\Symfony\Component\Console\Input\InputInterface $input, \Symfony\Component\Console\Output\OutputInterface $output)
@@ -31,8 +31,8 @@ class SubtreePushCommand extends BaseCommand
         $cwd = getcwd();
 
         $chdir = !is_null(Config::get('git.directory',null)) ? Config::get('git.directory'):__DIR__.'/dev';
-        if(!is_dir($chdir)){
-            throw new InvalidArgumentException('toolbox.git_subtree_push_invalid_dir');
+        if(!is_dir($chdir)){        	
+            throw new InvalidArgumentException('toolbox.git_subtree_push_invalid_config');            
         }
 
         $output->writeln("\n\n<info>Working in directory: <comment>".$chdir."</comment></info>");

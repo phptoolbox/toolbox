@@ -2,6 +2,8 @@
 
 namespace toolbox\core;
 
+use dayax\core\Dayax;
+
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Input\InputOption;
@@ -34,14 +36,31 @@ class Application extends BaseApplication
         try{
             Config::load();
         }catch(\Exception $e){
+        	//FIXME: Implement exception handling
         }
     }
 
     private function scanCommand()
-    {
+    {    	
         $dirs = array(
             __NAMESPACE__.'\\command' =>__DIR__.'/command',
         );
+        
+        foreach(Dayax::getLoader()->getPrefixes() as $prefix=>$paths){
+        	if($prefix === __NAMESPACE__ || false===strpos($prefix,'toolbox')){
+        		continue;
+        	}
+        	foreach($paths as $dir){
+        		$path = strtr($dir.'/'.$prefix.'/command',array(
+        				"\\"=>"/",
+        				"//"=>'/',
+        	    ));        		 	
+        		if(!is_dir($path)){
+        			continue;
+        		}
+        		$dirs[$prefix.'\\command']=$path;
+        	}
+        }        
 
         if(!is_null($config=Config::get('command',null))){
             if(isset($config['directory']) || isset($config['namespace'])){
@@ -73,6 +92,10 @@ class Application extends BaseApplication
         $class = $namespace.'\\'.$file->getBasename('.php');
         require_once($file);
         if(class_exists($class,true)){
+        	$r = new \ReflectionClass($class);
+        	if($r->isAbstract()){
+        		return;
+        	}        	
             $this->add(new $class());
         }
     }
